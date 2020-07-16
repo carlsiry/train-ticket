@@ -43,9 +43,20 @@ class App extends React.Component {
 
   searchTicket = () => {
     const { departCity, arriveCity, departDate, isSpeed } = this.props
-    window.location.replace(
+    window.location.reload(
       `/query.html?date=${departDate}&from=${departCity}&to=${arriveCity}&speed=${isSpeed}`
     )
+  }
+
+  setCity = (name) => {
+    const { dispatch, selectCityFor } = this.props
+    if (selectCityFor == null) {
+      return
+    }
+    if (selectCityFor === 'depart') {
+      return dispatch(setDepartCity(name))
+    }
+    return dispatch(setArriveCity(name))
   }
 
   render() {
@@ -57,6 +68,7 @@ class App extends React.Component {
       departDate,
       isSelectDate,
       selectCityFor,
+      dispatch,
     } = this.props
 
     return (
@@ -80,7 +92,13 @@ class App extends React.Component {
         <button className="search" onClick={this.searchTicket}>
           搜索
         </button>
-        {selectCityFor && <CityList lst={cityList} />}
+        {selectCityFor && (
+          <CityList
+            lst={cityList}
+            onSelectCity={this.setCity}
+            dispatch={dispatch}
+          />
+        )}
         {isSelectDate && <DateList now={departDate} />}
       </div>
     )
