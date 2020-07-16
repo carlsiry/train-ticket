@@ -8,8 +8,7 @@ import CityList from './CityList'
 import DateList from './DateList'
 
 function App(props) {
-  const { departCity, arriveCity, isSpeed, departDate } = props
-  console.log(props)
+  const { departCity, cityList, arriveCity, isSpeed, departDate } = props
   return (
     <div className="index-page">
       <Header title="搜索车次" />
@@ -20,8 +19,8 @@ function App(props) {
       <div className="depart-date">{getDateAndDayStr(departDate)}</div>
       <div className="is-speed">{isSpeed ? '是' : '非'}高速</div>
       <button className="search">搜索</button>
-      <CityList />
-      <DateList />
+      <CityList lst={cityList} />
+      <DateList now={departDate} />
     </div>
   )
 }

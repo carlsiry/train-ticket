@@ -1,0 +1,14 @@
+.date-list .title {
+  display: flex;
+  justify-content: space-between;
+}
+
+.date-list .week {
+  display: flex;
+  justify-content: space-between;
+}
+.week .day {
+  width: 2rem;
+  height: 2rem;
+  text-align: center;
+}
