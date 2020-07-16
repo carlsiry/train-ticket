@@ -5,7 +5,7 @@ import reducer from './reducers'
 const initialState = {
   departCity: null,
   arriveCity: null,
-  departDate: Date.now(),
+  departDate: new Date(),
   isSpeed: false,
   cityList: [],
 }
