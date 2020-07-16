@@ -49,14 +49,16 @@ class App extends React.Component {
   }
 
   setCity = (name) => {
-    const { dispatch, selectCityFor } = this.props
-    if (selectCityFor == null) {
+    const { dispatch, selectCityFor: cityType } = this.props
+    if (cityType == null) {
       return
     }
-    if (selectCityFor === 'depart') {
-      return dispatch(setDepartCity(name))
+    if (cityType === 'depart') {
+      dispatch(setDepartCity(name))
+    } else {
+      dispatch(setArriveCity(name))
     }
-    return dispatch(setArriveCity(name))
+    dispatch(selectCityFor())
   }
 
   render() {

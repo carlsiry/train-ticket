@@ -17,15 +17,16 @@ class CityList extends React.Component {
       .catch((err) => console.log(err))
   }
 
+  indexTitle = (c) => document.querySelector(`.title-${c}`).scrollIntoView()
+
   render() {
     const { lst, onSelectCity } = this.props
-    console.log(lst)
     return (
       <div className="city-list">
         <div className="list">
           {lst.map((it, index) => (
             <React.Fragment>
-              <div className="city-title">{it.title}</div>
+              <div className={`title-${it.title}`}>{it.title}</div>
               {it.citys &&
                 it.citys.map((city) => (
                   <div
@@ -42,7 +43,11 @@ class CityList extends React.Component {
 
         <div className="charactor-index">
           {charactors.map((it, index) => (
-            <div key={index} className="index">
+            <div
+              key={index}
+              className="index"
+              onClick={() => this.indexTitle(it)}
+            >
               {it}
             </div>
           ))}
