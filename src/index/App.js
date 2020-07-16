@@ -10,6 +10,7 @@ import {
   selectCityFor,
   setArriveCity,
   setDepartCity,
+  setDepartDate,
   toggleIsSelectDate,
   toggleIsSpeed,
 } from './actions'
@@ -61,6 +62,11 @@ class App extends React.Component {
     dispatch(selectCityFor())
   }
 
+  setSelectDepartDate = (date) => {
+    const { dispatch } = this.props
+    dispatch(setDepartDate(date))
+  }
+
   render() {
     const {
       departCity,
@@ -101,7 +107,9 @@ class App extends React.Component {
             dispatch={dispatch}
           />
         )}
-        {isSelectDate && <DateList now={departDate} />}
+        {isSelectDate && (
+          <DateList now={new Date()} onSelectDate={this.setSelectDepartDate} />
+        )}
       </div>
     )
   }

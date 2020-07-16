@@ -6,7 +6,7 @@ import './DateList.css'
 
 // 城市列表组件
 function DateList(props) {
-  const { now } = props
+  const { now, onSelectDate } = props
   const nowYear = now.getFullYear()
   const nowMonth = now.getMonth()
 
@@ -76,7 +76,7 @@ function DateList(props) {
       {firstWeeks.map((week, index) => (
         <div key={index} className="week">
           {week.map((day, index) => (
-            <span key={index} className="day">
+            <span key={index} className="day" onClick={() => onSelectDate(day)}>
               {day.getDate()}
             </span>
           ))}
@@ -94,7 +94,7 @@ function DateList(props) {
       {secondWeeks.map((week, index) => (
         <div key={index} className="week">
           {week.map((day, index) => (
-            <span key={index} className="day">
+            <span key={index} className="day" onClick={() => onSelectDate(day)}>
               {day.getDate()}
             </span>
           ))}
