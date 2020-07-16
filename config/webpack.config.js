@@ -1,4 +1,4 @@
-'use strict'
+
 
 const fs = require('fs')
 const path = require('path')
@@ -532,6 +532,8 @@ module.exports = function (webpackEnv) {
           {
             inject: true,
             template: paths.appHtml,
+            filename: 'index.html',
+            chunks: ['index'],
           },
           isEnvProduction
             ? {
@@ -558,6 +560,8 @@ module.exports = function (webpackEnv) {
           {
             inject: true,
             template: paths.appQueryHtml,
+            filename: 'query.html',
+            chunks: ['query'],
           },
           isEnvProduction
             ? {
@@ -584,6 +588,8 @@ module.exports = function (webpackEnv) {
           {
             inject: true,
             template: paths.appTicketHtml,
+            filename: 'ticket.html',
+            chunks: ['ticket'],
           },
           isEnvProduction
             ? {
@@ -610,6 +616,8 @@ module.exports = function (webpackEnv) {
           {
             inject: true,
             template: paths.appOrderHtml,
+            filename: 'order.html',
+            chunks: ['order'],
           },
           isEnvProduction
             ? {
