@@ -73,8 +73,8 @@ function DateList(props) {
         <span>周六</span>
         <span>周日</span>
       </div>
-      {firstWeeks.map((week) => (
-        <div className="week">
+      {firstWeeks.map((week, index) => (
+        <div key={index} className="week">
           {week.map((day, index) => (
             <span key={index} className="day">
               {day.getDate()}
@@ -91,8 +91,8 @@ function DateList(props) {
         <span>周六</span>
         <span>周日</span>
       </div>
-      {secondWeeks.map((week) => (
-        <div className="week">
+      {secondWeeks.map((week, index) => (
+        <div key={index} className="week">
           {week.map((day, index) => (
             <span key={index} className="day">
               {day.getDate()}

@@ -30,3 +30,17 @@ export function setCityList(lst) {
     payload: lst,
   }
 }
+
+export function toggleIsSelectDate(is) {
+  return {
+    type: 'TOGGLE_IS_SELECT_DATE',
+    payload: is,
+  }
+}
+
+export function selectCityFor(type) {
+  return {
+    type: 'SELECT_CITY_FOR',
+    payload: type,
+  }
+}

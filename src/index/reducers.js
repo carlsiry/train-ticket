@@ -40,6 +40,29 @@ function isSpeed(state = false, action) {
   }
 }
 
+function isSelectDate(state = false, action) {
+  const { type } = action
+  switch (type) {
+    case 'TOGGLE_IS_SELECT_DATE':
+      return !state
+    default:
+      return state
+  }
+}
+
+function selectCityFor(state = null, action) {
+  const { type, payload } = action
+  switch (type) {
+    case 'SELECT_CITY_FOR':
+      if (state != null) {
+        return null
+      }
+      return payload
+    default:
+      return state
+  }
+}
+
 function cityList(state = [], action) {
   const { type, payload } = action
   switch (type) {
@@ -56,4 +79,6 @@ export default combineReducers({
   departDate,
   isSpeed,
   cityList,
+  isSelectDate,
+  selectCityFor,
 })
