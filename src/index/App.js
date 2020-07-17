@@ -51,13 +51,6 @@ class App extends React.Component {
     dispatch(toggleIsSpeed())
   }
 
-  searchTicket = () => {
-    const { departCity, arriveCity, departDate, isSpeed } = this.props
-    window.location.reload(
-      `/query.html?date=${departDate}&from=${departCity}&to=${arriveCity}&speed=${isSpeed}`
-    )
-  }
-
   setCity = (name) => {
     const { dispatch, selectCityFor: cityType } = this.props
     if (cityType == null) {
