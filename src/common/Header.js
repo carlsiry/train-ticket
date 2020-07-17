@@ -7,9 +7,9 @@ function Header(props) {
   const { title, onBack } = props
   return (
     <div className="header">
-      <button className="back" onClick={() => onBack()}>
+      <div className="back" onClick={onBack}>
         &lt;
-      </button>
+      </div>
       <span className="title">{title}</span>
       <span className="fill-space"></span>
     </div>

@@ -13,9 +13,18 @@ import {
   setDepartDate,
   toggleIsSelectDate,
   toggleIsSpeed,
+  setCityList,
 } from './actions'
 
 class App extends React.Component {
+  componentDidMount() {
+    const { dispatch } = this.props
+    fetch('/rest/cities?_' + Date.now())
+      .then((res) => res.json())
+      .then((data) => dispatch(setCityList(data.cityList)))
+      .catch((err) => console.log(err))
+  }
+
   hdlClickDepartCity = () => {
     const { dispatch } = this.props
     dispatch(selectCityFor('depart'))
@@ -66,6 +75,14 @@ class App extends React.Component {
     const { dispatch } = this.props
     dispatch(setDepartDate(date))
   }
+  closeCityList = () => {
+    const { dispatch } = this.props
+    dispatch(selectCityFor())
+  }
+  closeDateList = () => {
+    const { dispatch } = this.props
+    dispatch(toggleIsSelectDate())
+  }
 
   render() {
     const {
@@ -76,39 +93,60 @@ class App extends React.Component {
       departDate,
       isSelectDate,
       selectCityFor,
-      dispatch,
     } = this.props
-
     return (
       <div className="index-page">
-        <Header title="搜索车次" />
-        <div className="city-from-to">
-          <div className="from" onClick={this.hdlClickDepartCity}>
-            {departCity}
+        <Header title="搜索车次" onBack={() => window.history.back()} />
+        <form className="search-form" action="query.html">
+          <div className="city-from-to">
+            <input
+              className="from"
+              name="from"
+              readOnly
+              type="text"
+              value={departCity}
+              onClick={this.hdlClickDepartCity}
+            />
+            <button type="button" onClick={this.hdlSwpCity}>
+              到
+            </button>
+            <input
+              className="to"
+              name="to"
+              readOnly
+              type="text"
+              value={arriveCity}
+              onClick={this.hdlClickArriveCity}
+            />
           </div>
-          <button onClick={this.hdlSwpCity}>到</button>
-          <div className="to" onClick={this.hdlClickArriveCity}>
-            {arriveCity}
+          <div className="depart-date" onClick={this.toggleSelectDate}>
+            {getDateAndDayStr(departDate)}
           </div>
-        </div>
-        <div className="depart-date" onClick={this.toggleSelectDate}>
-          {getDateAndDayStr(departDate)}
-        </div>
-        <div className="is-speed" onClick={this.toggleSpeed}>
-          {isSpeed ? '是' : '非'}高速
-        </div>
-        <button className="search" onClick={this.searchTicket}>
-          搜索
-        </button>
-        {selectCityFor && (
-          <CityList
-            lst={cityList}
-            onSelectCity={this.setCity}
-            dispatch={dispatch}
+          <input
+            className="is-speed"
+            type="checkbox"
+            name="isSpped"
+            value={isSpeed}
+            id="is-speed"
+            onClick={this.toggleSpeed}
           />
-        )}
+          高速
+          <button type="submit" className="search">
+            搜索
+          </button>
+        </form>
+        <CityList
+          isShow={selectCityFor ? true : false}
+          lst={cityList}
+          onSelectCity={this.setCity}
+          onClose={this.closeCityList}
+        />
         {isSelectDate && (
-          <DateList now={new Date()} onSelectDate={this.setSelectDepartDate} />
+          <DateList
+            now={new Date()}
+            onSelectDate={this.setSelectDepartDate}
+            onClose={this.closeDateList}
+          />
         )}
       </div>
     )

@@ -2,11 +2,13 @@ import React from 'react'
 import { memo } from 'react'
 import dayjs from 'dayjs'
 
+import Header from '../common/Header'
+
 import './DateList.css'
 
 // 城市列表组件
 function DateList(props) {
-  const { now, onSelectDate } = props
+  const { now, onSelectDate, onClose } = props
   const nowYear = now.getFullYear()
   const nowMonth = now.getMonth()
 
@@ -64,6 +66,7 @@ function DateList(props) {
 
   return (
     <div className="date-list">
+      <Header title="选择日期" onBack={onClose} />
       <div className="title">
         <span>周一</span>
         <span>周二</span>
